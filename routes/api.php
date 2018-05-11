@@ -17,6 +17,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//Index Page Vue
+route::get('/', 'PagesControllerApi@Index');
+
 //Afficher la liste de toutes les notes
 Route::get('notes', 'NotesApiController@index');
 

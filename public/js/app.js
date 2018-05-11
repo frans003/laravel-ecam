@@ -13981,9 +13981,9 @@ module.exports = __webpack_require__(45);
 
 /***/ }),
 /* 13 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-
+"use strict";
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -47318,6 +47318,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -47329,20 +47338,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 title: '',
                 body: ''
             },
+
             note_id: '',
-            pagination: {},
             edit: false
         };
     },
     created: function created() {
-        this.fetchNotes();
+        this.fetchArticles();
     },
 
-
     methods: {
-        fetchNotes: function fetchNotes() {
-            fetch('http://localhost:8000/api/notes').then(function (res) {
-                console.log(res);
+        fetchArticles: function fetchArticles() {
+            var _this = this;
+
+            fetch('http://localhost:8888/api/notes').then(function (res) {
+                _this.notes = res.data;
             });
         }
     }
@@ -47356,16 +47366,24 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    _vm._l(_vm.notes, function(note) {
+      return _c("div", { key: note.id, staticClass: "card card-body" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-8 col-sm-8" }, [
+            _c("h3", [_vm._v(_vm._s(note.title))]),
+            _vm._v(" "),
+            _c("p", [_vm._v(_vm._s(note.body))]),
+            _vm._v(" "),
+            _c("small", [_vm._v("Créé le " + _vm._s(note.date.filters))])
+          ])
+        ])
+      ])
+    })
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [_c("h2", [_vm._v("Notes")])])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
