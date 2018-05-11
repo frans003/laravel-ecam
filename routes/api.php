@@ -13,24 +13,24 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 //Index Page Vue
-route::get('/', 'PagesControllerApi@Index');
+Route::get('/', 'PagesControllerApi@index');
 
 //Afficher la liste de toutes les notes
 Route::get('notes', 'NotesApiController@index');
 
 //Montre une note selon son id
-Route::get('note/{id}', 'NotesApiController@show'); 
+Route::get('notes/{id}', 'NotesApiController@show'); 
 
 //Enregistre la note
-Route::post('note', 'NotesApiController@store'); 
+Route::post('notes', 'NotesApiController@store'); 
 
 //Mise-à-jour d'une note
-Route::put('note/{id}', 'NotesApiController@update'); 
+Route::put('notes/{id}', 'NotesApiController@update'); 
 
 //Effacer une note
-Route::delete('note/{id}', 'NotesApiController@destroy');
+Route::delete('notes/{id}', 'NotesApiController@destroy');

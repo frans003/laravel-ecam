@@ -15,8 +15,7 @@ class NotesApiController extends Controller
     public function index()
     {
         $notes = Note::all();
-        // Va nous aider a formater les informations qui sont renvoyés, en utulisant la resource
-        return $notes;
+        return response() -> json( Note::all() );
     }
 
     /**

@@ -4,6 +4,15 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+import Vue from 'vue';
+import VueAxios from "vue-axios";
+import axios from "axios";
+import VueRouter from 'vue-router';
+axios.defaults.baseURL = "http://localhost:8000/api";
+Vue.use(VueAxios, axios);
+
+Vue.use(VueRouter)
+
 require('./bootstrap');
 
 window.Vue = require('vue');
@@ -20,4 +29,4 @@ Vue.component('navbar', require('./components/navbar.vue'));
 
 const app = new Vue({
     el: '#app'
-});
+    });
