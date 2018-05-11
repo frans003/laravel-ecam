@@ -15,7 +15,8 @@ class NotesApiController extends Controller
     public function index()
     {
         $notes = Note::all();
-        return response() -> json( Note::all() );
+        return response()->json($notes, 200);
+        // return response() -> json( Note::all() );
     }
 
     /**

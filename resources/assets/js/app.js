@@ -5,17 +5,20 @@
  */
 
 import Vue from 'vue';
+import VueRouter from 'vue-router';
 import VueAxios from "vue-axios";
 import axios from "axios";
-import VueRouter from 'vue-router';
-axios.defaults.baseURL = "http://localhost:8000/api";
-Vue.use(VueAxios, axios);
+axios.defaults.baseURL = "http://localhost:8000/api/notes";
 
 Vue.use(VueRouter)
+Vue.use(VueAxios, axios);
 
 require('./bootstrap');
 
 window.Vue = require('vue');
+
+
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -29,4 +32,4 @@ Vue.component('navbar', require('./components/navbar.vue'));
 
 const app = new Vue({
     el: '#app'
-    });
+});

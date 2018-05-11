@@ -30,21 +30,17 @@ export default {
         },
 
         created() {
-            this.fetchNotes();
+            this.fetchArticles();
         },
 
         methods: {
-            fetchNotes(page_url) {
-                let vm = this;
-                page_url = page_url || 'http://localhost:8888/api/notes'
-                this.axios.get(page_url)
-                    .then(res => {
-                        this.notes = res.data.data;
-                        vm.makePagination(res.meta, res.links);
-                    })
-                    .catch(err => console.log(err));
-
+            fetchArticles() {
+                this.axios.get('http://localhost:8000/api/notes')
+                .then(response => {
+                    this.notes = response.data;
+                })
             },
+
             makePagination(meta, links){
                 let pagination = {
                     current_page: meta.current_page,
