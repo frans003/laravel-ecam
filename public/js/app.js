@@ -47342,6 +47342,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -47351,8 +47359,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 id: '',
                 title: '',
                 body: '',
-                date: '',
-                cover_image: ''
+                date: ''
             },
             note_id: '',
             pagination: {},
@@ -47365,11 +47372,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
     methods: {
-        fetchArticles: function fetchArticles() {
+        fetchArticles: function fetchArticles(page_url) {
             var _this = this;
 
+            var vm = this;
             this.axios.get('http://localhost:8000/api/notes').then(function (response) {
                 _this.notes = response.data;
+                vm.makePagination(response.meta, response.links);
             });
         },
         makePagination: function makePagination(meta, links) {
@@ -47379,7 +47388,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 next_page_url: links.next,
                 prev_page_url: links.prev
             };
-
             this.pagination = pagination;
         }
     }
@@ -47396,14 +47404,40 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("h2", [_vm._v("Notes")]),
+      _c("h2", { staticClass: "m-4" }, [_vm._v("Notes")]),
+      _vm._v(" "),
+      _c("nav", { attrs: { "aria-label": "page navigation example" } }, [
+        _c("ul", { staticClass: "pagination" }, [
+          _c(
+            "li",
+            {
+              staticClass: "page-item",
+              class: [{ disabled: !_vm.pagination.prev_page_url }],
+              on: {
+                click: function($event) {
+                  _vm.fetchArticles(_vm.pagination.prev.page_url)
+                }
+              }
+            },
+            [
+              _c("a", { staticClass: "page-link", attrs: { href: "" } }, [
+                _vm._v("Previous")
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _vm._m(0)
+        ])
+      ]),
       _vm._v(" "),
       _vm._l(_vm.notes, function(note) {
-        return _c("div", { key: note.id, staticClass: "card card-body" }, [
+        return _c("div", { key: note.id, staticClass: "card card-body m-2" }, [
           _c("div", { staticClass: "col-md-8 col-sm-8" }, [
             _c("h3", [_vm._v(_vm._s(note.title))]),
             _vm._v(" "),
-            _c("p", [_vm._v(_vm._s(note.body))])
+            _c("p", [_vm._v(_vm._s(note.body))]),
+            _vm._v(" "),
+            _c("small", [_vm._v(" " + _vm._s(note.id) + " ")])
           ])
         ])
       })
@@ -47411,7 +47445,18 @@ var render = function() {
     2
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "page-item" }, [
+      _c("a", { staticClass: "page-link", attrs: { href: "" } }, [
+        _vm._v("Next")
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
