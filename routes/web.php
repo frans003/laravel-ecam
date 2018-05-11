@@ -11,20 +11,23 @@
 |
 */
 
+//Authentification
 Auth::routes();
 
+//Retourne la page de bienvenue
 Route::get('/', 'PagesController@index');
 
-Route::get('/about', 'PagesController@about');
-
+//Retourne le profil de la personne avec les informations
 Route::get('/profile', 'PagesController@profile');
 
+//Retourne le dashboard de la personne
 Route::get('/dashboard', 'DashboardController@index');
 
+//Controlleur pour les notes
 Route::resource('notes', 'NotesController');
 
+//Controlleur pour les cours
 Route::resource('cours', 'CoursesController');
 
+//Controlleur pour les universités
 Route::resource('universites', 'UniversitiesController');
-
-Route::resource('vue/notes', 'NotesControllerVue');

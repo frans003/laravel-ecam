@@ -17,8 +17,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//Afficher la liste de toutes les notes
 Route::get('notes', 'NotesApiController@index');
-Route::get('notes/{id}', 'NotesApiController@show'); 
-Route::post('notes', 'NotesApiController@store'); 
-Route::put('notes/{id}', 'NotesApiController@update'); 
-Route::delete('notes/{id}', 'NotesApiController@destroy');
+
+//Montre une note selon son id
+Route::get('note/{id}', 'NotesApiController@show'); 
+
+//Enregistre la note
+Route::post('note', 'NotesApiController@store'); 
+
+//Mise-à-jour d'une note
+Route::put('note/{id}', 'NotesApiController@update'); 
+
+//Effacer une note
+Route::delete('note/{id}', 'NotesApiController@destroy');
