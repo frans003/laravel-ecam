@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests;
 use App\Note;
+use App\Http\Resources\Note as NoteResource;
 
 class NotesApiController extends Controller
 {
-        /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -15,8 +17,7 @@ class NotesApiController extends Controller
     public function index()
     {
         $notes = Note::all();
-        return response()->json($notes, 200);
-        // return response() -> json( Note::all() );
+        return NoteResource::collection($notes);
     }
 
     /**
@@ -34,6 +35,7 @@ class NotesApiController extends Controller
         $note->body = $request -> input('body');
         $note->file_name = $request -> input('file_name');
         $note->save();
+        return new NoteResource($note);
         return response() -> json('success', 200);
     }
 
@@ -45,8 +47,8 @@ class NotesApiController extends Controller
      */
     public function show($id)
     {
-        $note = Note::find($id);
-        return $note;
+        $note = Note::findOrFail($id);
+        return new NoteResource($note);
     }
 
     /**
@@ -65,6 +67,7 @@ class NotesApiController extends Controller
         $note->body = $request -> input('body');
         $note->file_name = $request -> input('file_name');
         $note->save();
+        return new NoteResource($note);
         return response() -> json('success', 200);
     }
 
@@ -77,9 +80,7 @@ class NotesApiController extends Controller
     public function destroy($id)
     {
         $note = Note::find($id);
-
         $note -> delete();
-
         return response() -> json('success', 200);
     }
 }
