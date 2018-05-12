@@ -16,7 +16,7 @@ class NotesApiController extends Controller
      */
     public function index()
     {
-        $notes = Note::all();
+        $notes = Note::paginate(5);
         return NoteResource::collection($notes);
     }
 
