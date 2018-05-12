@@ -3,16 +3,6 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import VueAxios from "vue-axios";
-import axios from "axios";
-axios.defaults.baseURL = "http://localhost:8000/api/notes";
-
-Vue.use(VueRouter)
-Vue.use(VueAxios, axios);
-
 require('./bootstrap');
 
 window.Vue = require('vue');
@@ -24,8 +14,9 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('articles', require('./components/articles.vue'));
+Vue.component('notes', require('./components/notes.vue'));
 Vue.component('navbar', require('./components/navbar.vue'));
+Vue.component('paginate', require('vuejs-paginate'));
 
 
 const app = new Vue({
