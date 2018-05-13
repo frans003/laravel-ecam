@@ -7,6 +7,11 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+import VueAxios from "vue-axios";
+import axios from "axios";
+
+Vue.use(VueAxios, axios);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -15,8 +20,8 @@ window.Vue = require('vue');
  */
 
 Vue.component('notes', require('./components/notes.vue'));
+Vue.component('articles', require('./components/articles.vue'));
 Vue.component('navbar', require('./components/navbar.vue'));
-Vue.component('paginate', require('vuejs-paginate'));
 
 
 const app = new Vue({
