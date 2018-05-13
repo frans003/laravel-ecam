@@ -47801,6 +47801,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -47900,7 +47901,7 @@ var render = function() {
             _c(
               "div",
               {
-                staticClass: "btn btn-secondary",
+                staticClass: "btn btn-secondary m-2",
                 on: {
                   click: function($event) {
                     _vm.showForm = !_vm.showForm
@@ -47914,7 +47915,7 @@ var render = function() {
             _c(
               "div",
               {
-                staticClass: "btn btn-secondary",
+                staticClass: "btn btn-secondary m-2",
                 on: {
                   click: function($event) {
                     _vm.showForm = !_vm.showForm
@@ -47930,8 +47931,8 @@ var render = function() {
             _vm.edit
               ? _c("div", [
                   _c("div", { staticClass: "card-header" }, [
-                    _vm._v("Vous modifiez: "),
-                    _c("strong", [_vm._v(" " + _vm._s(_vm.note.title) + " ")])
+                    _vm._v("Vous modifiez la note ID: "),
+                    _c("strong", [_vm._v(" " + _vm._s(_vm.note.id) + " ")])
                   ])
                 ])
               : _c("div", [
@@ -48161,7 +48162,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "nav",
-      { staticClass: "navbar navbar-expand-sm navbar-dark bg-info mb-2" },
+      { staticClass: "navbar navbar-expand-sm navbar-dark bg-primary mb-2" },
       [
         _c("div", { staticClass: "container" }, [
           _c("a", { staticClass: "navbar-brand", attrs: { href: "" } }, [

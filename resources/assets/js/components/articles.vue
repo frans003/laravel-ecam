@@ -1,17 +1,18 @@
 <template>
     <div>
         <h2 class="m-2 mt-4" id="formulaire">Notes</h2>
+    
         <div v-if="!showForm">
-            <div class="btn btn-secondary" @click="showForm = !showForm">Ajouter</div>
+            <div class="btn btn-secondary m-2" @click="showForm = !showForm">Ajouter</div>
         </div>
         <div v-else>
-            <div class="btn btn-secondary" @click="showForm = !showForm">Annuler</div>
+            <div class="btn btn-secondary m-2" @click="showForm = !showForm">Annuler</div>
         </div>
     
     
         <div class="card m-4" v-if="showForm">
             <div v-if="edit">
-                <div class="card-header">Vous modifiez: <strong> {{ note.title }} </strong></div>
+                <div class="card-header">Vous modifiez la note ID: <strong> {{ note.id }} </strong></div>
             </div>
             <div v-else>
                 <div class="card-header">Ajouter une note</div>
