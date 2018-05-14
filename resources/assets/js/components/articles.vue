@@ -1,4 +1,5 @@
 <template>
+    <!-- Forumaire d'ajout et modification de note -->
     <div>
         <h2 class="m-2 mt-4" id="formulaire">Notes</h2>
     
@@ -31,6 +32,20 @@
                 <div class="btn btn-info" @click="addNote">Enregistrer</div>
             </div>
         </div>
+
+        <!-- Pagination -->
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item"><a class="page-link" href="#" @click="fetchNotes(pagination.prev_page_url)">Previous</a></li>
+    
+                <li class="page-item disabled"><a class="page-link text-dark" href="#">Page {{ pagination.current_page }} of {{ pagination.last_page }}</a></li>
+    
+                <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="page-item"><a class="page-link" href="#" @click="fetchNotes(pagination.next_page_url)">Next</a></li>
+            </ul>
+        </nav>
+
+        <!-- Liste des notes trié dans le controller -->
     
         <h2 class="m-2">Toutes les notes</h2>
     
@@ -59,84 +74,89 @@
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                notes: [],
-                note: {
-                    course_id: 1,
-                    user_id: 1,
-                    file_name: "document_1525777760.rtf",
-                },
-                edit: false,
-                showForm: false
-            };
-        },
-    
-        created() {
-            this.fetchNotes();
-        },
-    
-        methods: {
-            fetchNotes() {
-                let uri = "http://localhost:8000/api/notes";
-                this.axios.get(uri)
-                    .then(response => {
-                        this.notes = response.data;
-                    })
-            },
-    
-            addNote() {
-                if (this.edit == false) {
-                    let uri = "http://localhost:8000/api/notes";
-                    this.axios.post(uri, this.note);
-                    alert('Note ajoutée');
-                    this.note = {
-                        user_id: 1,
-                        course_id: 1,
-                        file_name: "document_1525777760.rtf",
-                    };
-                    this.fetchNotes();
-                }
-                //update dans la base de données
-                else {
-                    let uri = "http://localhost:8000/api/notes/" + this.note.id;
-                    this.axios.put(uri, this.note);
-                    alert('Note Modifiée');
-                    this.note = {
-                        user_id: 1,
-                        course_id: 1,
-                        file_name: "document_1525777760.rtf",
-                    };
-                    this.fetchNotes();
-                    this.edit = false;
-                }
-            },
-    
-            updateNote(note) {
-                //duplication de l'objet pour éviter qu'il ne se modifie instanément
-                this.note = JSON.parse(JSON.stringify(note));
-                this.edit = true;
-                this.showForm = true;
-            },
-    
-            deleteNote(id) {
-                if (confirm('Voulez-vous vraiment supprimer la note?')) {
-                    let uri = "http://localhost:8000/api/notes/" + id;
-                    this.axios.delete(uri)
-                    this.fetchNotes()
-                }
-            },
-    
-            makePagination(meta, links) {
-                let pagination = {
-                    current_page: meta.current_page,
-                    last_page: meta.last_page,
-                    next_page_url: links.next,
-                    prev_page_url: links.prev
-                };
-                this.pagination = pagination;
-            }
-        }
+export default {
+  data() {
+    return {
+      notes: [],
+      note: {
+        course_id: 1,
+        user_id: 1,
+        file_name: "document_1525777760.rtf"
+      },
+      edit: false,
+      pagination: {},
+      showForm: false
     };
+  },
+
+  created() {
+    this.fetchNotes();
+  },
+
+  methods: {
+    fetchNotes(page_url) {
+      let uri = "";
+      if (page_url) {
+        uri = page_url;
+      } else {
+        uri = "http://localhost:8000/api/notes";
+      }
+      this.axios.get(uri).then(response => {
+        this.notes = response.data;
+        this.makePagination(this.notes);
+      });
+    },
+
+    makePagination(notes) {
+      let pagination = {
+        current_page: notes.meta.current_page,
+        last_page: notes.meta.last_page,
+        next_page_url: notes.links.next,
+        prev_page_url: notes.links.prev
+      };
+      this.pagination = pagination;
+    },
+
+    addNote() {
+      if (this.edit == false) {
+        let uri = "http://localhost:8000/api/notes";
+        this.axios.post(uri, this.note);
+        alert("Note ajoutée");
+        this.note = {
+          user_id: 1,
+          course_id: 1,
+          file_name: "document_1525777760.rtf"
+        };
+        this.fetchNotes();
+      } else {
+        //update dans la base de données
+        let uri = "http://localhost:8000/api/notes/" + this.note.id;
+        this.axios.put(uri, this.note);
+        alert("Note Modifiée");
+        this.note = {
+          user_id: 1,
+          course_id: 1,
+          file_name: "document_1525777760.rtf"
+        };
+        this.fetchNotes();
+        this.edit = false;
+      }
+    },
+
+    updateNote(note) {
+      //duplication de l'objet pour éviter qu'il ne se modifie instanément
+      this.note = JSON.parse(JSON.stringify(note));
+      this.edit = true;
+      this.showForm = true;
+    },
+
+    deleteNote(id) {
+      if (confirm("Voulez-vous vraiment supprimer la note?")) {
+        let uri = "http://localhost:8000/api/notes/" + id;
+        this.axios.delete(uri);
+        this.fetchNotes();
+      }
+    }
+  }
+};
 </script>

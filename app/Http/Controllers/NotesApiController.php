@@ -16,7 +16,7 @@ class NotesApiController extends Controller
      */
     public function index()
     {
-        $notes = Note::paginate(20)->sortByDesc("updated_at");
+        $notes = Note::orderBy('updated_at', 'desc')->paginate(5);
         return NoteResource::collection($notes);
     }
 

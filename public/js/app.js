@@ -47802,83 +47802,104 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            notes: [],
-            note: {
-                course_id: 1,
-                user_id: 1,
-                file_name: "document_1525777760.rtf"
-            },
-            edit: false,
-            showForm: false
+  data: function data() {
+    return {
+      notes: [],
+      note: {
+        course_id: 1,
+        user_id: 1,
+        file_name: "document_1525777760.rtf"
+      },
+      edit: false,
+      pagination: {},
+      showForm: false
+    };
+  },
+  created: function created() {
+    this.fetchNotes();
+  },
+
+
+  methods: {
+    fetchNotes: function fetchNotes(page_url) {
+      var _this = this;
+
+      var uri = "";
+      if (page_url) {
+        uri = page_url;
+      } else {
+        uri = "http://localhost:8000/api/notes";
+      }
+      this.axios.get(uri).then(function (response) {
+        _this.notes = response.data;
+        _this.makePagination(_this.notes);
+      });
+    },
+    makePagination: function makePagination(notes) {
+      var pagination = {
+        current_page: notes.meta.current_page,
+        last_page: notes.meta.last_page,
+        next_page_url: notes.links.next,
+        prev_page_url: notes.links.prev
+      };
+      this.pagination = pagination;
+    },
+    addNote: function addNote() {
+      if (this.edit == false) {
+        var uri = "http://localhost:8000/api/notes";
+        this.axios.post(uri, this.note);
+        alert("Note ajoutée");
+        this.note = {
+          user_id: 1,
+          course_id: 1,
+          file_name: "document_1525777760.rtf"
         };
-    },
-    created: function created() {
         this.fetchNotes();
+      } else {
+        //update dans la base de données
+        var _uri = "http://localhost:8000/api/notes/" + this.note.id;
+        this.axios.put(_uri, this.note);
+        alert("Note Modifiée");
+        this.note = {
+          user_id: 1,
+          course_id: 1,
+          file_name: "document_1525777760.rtf"
+        };
+        this.fetchNotes();
+        this.edit = false;
+      }
     },
-
-
-    methods: {
-        fetchNotes: function fetchNotes() {
-            var _this = this;
-
-            var uri = "http://localhost:8000/api/notes";
-            this.axios.get(uri).then(function (response) {
-                _this.notes = response.data;
-            });
-        },
-        addNote: function addNote() {
-            if (this.edit == false) {
-                var uri = "http://localhost:8000/api/notes";
-                this.axios.post(uri, this.note);
-                alert('Note ajoutée');
-                this.note = {
-                    user_id: 1,
-                    course_id: 1,
-                    file_name: "document_1525777760.rtf"
-                };
-                this.fetchNotes();
-            }
-            //update dans la base de données
-            else {
-                    var _uri = "http://localhost:8000/api/notes/" + this.note.id;
-                    this.axios.put(_uri, this.note);
-                    alert('Note Modifiée');
-                    this.note = {
-                        user_id: 1,
-                        course_id: 1,
-                        file_name: "document_1525777760.rtf"
-                    };
-                    this.fetchNotes();
-                    this.edit = false;
-                }
-        },
-        updateNote: function updateNote(note) {
-            //duplication de l'objet pour éviter qu'il ne se modifie instanément
-            this.note = JSON.parse(JSON.stringify(note));
-            this.edit = true;
-            this.showForm = true;
-        },
-        deleteNote: function deleteNote(id) {
-            if (confirm('Voulez-vous vraiment supprimer la note?')) {
-                var uri = "http://localhost:8000/api/notes/" + id;
-                this.axios.delete(uri);
-                this.fetchNotes();
-            }
-        },
-        makePagination: function makePagination(meta, links) {
-            var pagination = {
-                current_page: meta.current_page,
-                last_page: meta.last_page,
-                next_page_url: links.next,
-                prev_page_url: links.prev
-            };
-            this.pagination = pagination;
-        }
+    updateNote: function updateNote(note) {
+      //duplication de l'objet pour éviter qu'il ne se modifie instanément
+      this.note = JSON.parse(JSON.stringify(note));
+      this.edit = true;
+      this.showForm = true;
+    },
+    deleteNote: function deleteNote(id) {
+      if (confirm("Voulez-vous vraiment supprimer la note?")) {
+        var uri = "http://localhost:8000/api/notes/" + id;
+        this.axios.delete(uri);
+        this.fetchNotes();
+      }
     }
+  }
 });
 
 /***/ }),
@@ -48014,6 +48035,71 @@ var render = function() {
             ])
           ])
         : _vm._e(),
+      _vm._v(" "),
+      _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
+        _c("ul", { staticClass: "pagination" }, [
+          _c(
+            "li",
+            {
+              staticClass: "page-item",
+              class: [{ disabled: !_vm.pagination.prev_page_url }]
+            },
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "page-link",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      _vm.fetchNotes(_vm.pagination.prev_page_url)
+                    }
+                  }
+                },
+                [_vm._v("Previous")]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c("li", { staticClass: "page-item disabled" }, [
+            _c(
+              "a",
+              { staticClass: "page-link text-dark", attrs: { href: "#" } },
+              [
+                _vm._v(
+                  "Page " +
+                    _vm._s(_vm.pagination.current_page) +
+                    " of " +
+                    _vm._s(_vm.pagination.last_page)
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "li",
+            {
+              staticClass: "page-item",
+              class: [{ disabled: !_vm.pagination.next_page_url }]
+            },
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "page-link",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      _vm.fetchNotes(_vm.pagination.next_page_url)
+                    }
+                  }
+                },
+                [_vm._v("Next")]
+              )
+            ]
+          )
+        ])
+      ]),
       _vm._v(" "),
       _c("h2", { staticClass: "m-2" }, [_vm._v("Toutes les notes")]),
       _vm._v(" "),
