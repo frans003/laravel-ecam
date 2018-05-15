@@ -47817,10 +47817,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      file: '',
+      courses: [],
+      course: {},
       notes: [],
       note: {
         course_id: 1,
@@ -47834,6 +47850,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   created: function created() {
     this.fetchNotes();
+    this.fetchCourses();
   },
 
 
@@ -47850,6 +47867,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.axios.get(uri).then(function (response) {
         _this.notes = response.data;
         _this.makePagination(_this.notes);
+      });
+    },
+    fetchCourses: function fetchCourses() {
+      var _this2 = this;
+
+      var uri = "http://localhost:8000/api/cours";
+      this.axios.get(uri).then(function (response) {
+        _this2.courses = response.data;
       });
     },
     makePagination: function makePagination(notes) {
@@ -47917,6 +47942,8 @@ var render = function() {
         _vm._v("Notes")
       ]),
       _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
       !_vm.showForm
         ? _c("div", [
             _c(
@@ -47929,7 +47956,10 @@ var render = function() {
                   }
                 }
               },
-              [_vm._v("Ajouter")]
+              [
+                _vm._v("Ajouter "),
+                _c("i", { staticClass: "fas fa-plus-circle" })
+              ]
             )
           ])
         : _c("div", [
@@ -47943,7 +47973,10 @@ var render = function() {
                   }
                 }
               },
-              [_vm._v("Annuler")]
+              [
+                _vm._v("Annuler "),
+                _c("i", { staticClass: "fas fa-minus-circle" })
+              ]
             )
           ]),
       _vm._v(" "),
@@ -48027,6 +48060,52 @@ var render = function() {
                 })
               ]),
               _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "cours" } }, [_vm._v("Cours")]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.note.course_id,
+                        expression: "note.course_id"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.note,
+                          "course_id",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  _vm._l(_vm.courses.data, function(course) {
+                    return _c(
+                      "option",
+                      { key: course.id, domProps: { value: course.id } },
+                      [_vm._v(" " + _vm._s(course.name))]
+                    )
+                  })
+                )
+              ]),
+              _vm._v(" "),
               _c(
                 "div",
                 { staticClass: "btn btn-info", on: { click: _vm.addNote } },
@@ -48036,7 +48115,9 @@ var render = function() {
           ])
         : _vm._e(),
       _vm._v(" "),
-      _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
+      _c("hr"),
+      _vm._v(" "),
+      _c("nav", { attrs: { "aria-label": "Pagination" } }, [
         _c("ul", { staticClass: "pagination" }, [
           _c(
             "li",
@@ -48101,7 +48182,7 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("h2", { staticClass: "m-2" }, [_vm._v("Toutes les notes")]),
+      _vm._m(0),
       _vm._v(" "),
       _vm._l(_vm.notes.data, function(note) {
         return _c("div", { key: note.id, staticClass: "card card-body m-4" }, [
@@ -48134,7 +48215,7 @@ var render = function() {
                         note.file_name
                     }
                   },
-                  [_vm._v("Télécharger")]
+                  [_c("i", { staticClass: "fas fa-download" })]
                 )
               ]),
               _vm._v(" "),
@@ -48143,6 +48224,7 @@ var render = function() {
                   "a",
                   {
                     staticClass: "btn btn-warning",
+                    staticStyle: { color: "white" },
                     attrs: { href: "#formulaire" },
                     on: {
                       click: function($event) {
@@ -48150,20 +48232,21 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("Modifier")]
+                  [_c("i", { staticClass: "fas fa-pencil-alt" })]
                 ),
                 _vm._v(" "),
                 _c(
                   "a",
                   {
                     staticClass: "btn btn-danger",
+                    staticStyle: { color: "white" },
                     on: {
                       click: function($event) {
                         _vm.deleteNote(note.id)
                       }
                     }
                   },
-                  [_vm._v("Effacer")]
+                  [_c("i", { staticClass: "far fa-trash-alt" })]
                 )
               ])
             ])
@@ -48174,7 +48257,17 @@ var render = function() {
     2
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h2", { staticClass: "m-2" }, [
+      _c("i", { staticClass: "fas fa-archive" }),
+      _vm._v(" Toutes les notes")
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -48252,8 +48345,23 @@ var staticRenderFns = [
       [
         _c("div", { staticClass: "container" }, [
           _c("a", { staticClass: "navbar-brand", attrs: { href: "" } }, [
-            _vm._v("Notes Sharing")
+            _c("i", { staticClass: "fas fa-book-open" }),
+            _vm._v(" Notes Sharing")
           ])
+        ]),
+        _vm._v(" "),
+        _c("ul", { staticClass: "navbar-nav mr-auto" }, [
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-light",
+              staticStyle: { color: "#F44336" },
+              attrs: {
+                href: "http://localhost:8888/Notes_App%20-%20V2/public/"
+              }
+            },
+            [_c("i", { staticClass: "fab fa-laravel" })]
+          )
         ])
       ]
     )

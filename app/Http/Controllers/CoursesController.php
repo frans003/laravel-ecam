@@ -10,7 +10,18 @@ class CoursesController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index', 'show']]);
+        $this->middleware('auth', ['except' => ['index', 'show', 'api']]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function api()
+    {
+        $courses = Course::orderby('course_id','asc')->paginate(10);
+        return $courses;
     }
 
     /**

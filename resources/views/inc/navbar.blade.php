@@ -74,6 +74,7 @@
                 @guest
                     <li><a class="nav-link" href="{{ route('login') }}">{{ __('Connexion') }}</a></li>
                     <li><a class="nav-link" href="{{ route('register') }}">{{ __("Inscription") }}</a></li>
+                    <li><a href="http://localhost:8000/api" class="nav-link btn btn-light" style="color:#41B883"> <i class="fab fa-vuejs"></i> </a></li>
 
                     <!-- Utilisateur connecté -->
                 @else
@@ -106,6 +107,8 @@
                         </div>
 
                     </li>
+
+                    <li><a href="http://localhost:8000/api" class="nav-link btn btn-light" style="color:#41B883"> <i class="fab fa-vuejs"> </i></a></li>
 
                 @endguest
 

@@ -23,6 +23,9 @@ Route::get('/', 'PagesControllerApi@index');
 //Afficher la liste de toutes les notes
 Route::get('notes', 'NotesApiController@index');
 
+//Renvoie tous les cours
+Route::get('cours', 'CoursesController@api');
+
 //Montre une note selon son id
 Route::get('notes/{id}', 'NotesApiController@show'); 
 
