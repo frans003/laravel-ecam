@@ -108,8 +108,6 @@
 
                     </li>
 
-                    <li><a href="http://localhost:8000/api" class="nav-link btn btn-light" style="color:#41B883"> <i class="fab fa-vuejs"> </i></a></li>
-
                 @endguest
 
             </ul>

@@ -1,5 +1,5 @@
 <template>
-  <!-- Forumaire d'ajout et modification de note -->
+  <!-- Formulaire d'ajout et modification de note -->
   <div>
     <h2 class="m-2 mt-4" id="formulaire">Notes</h2>
 
@@ -12,7 +12,7 @@
       <div class="btn btn-secondary m-2" @click="showForm = !showForm">Annuler <i class="fas fa-minus-circle"></i></div>
     </div>
   
-  
+  <!-- Show et hide le form en cliquant sur le bouton -->
   
     <div class="card m-4" v-if="showForm">
       <div v-if="edit">
@@ -104,7 +104,7 @@
         showForm: false
       };
     },
-  
+  // API des notes et cours
     created() {
       this.fetchNotes();
       this.fetchCourses();

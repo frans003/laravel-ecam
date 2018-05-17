@@ -47848,6 +47848,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       showForm: false
     };
   },
+
+  // API des notes et cours
   created: function created() {
     this.fetchNotes();
     this.fetchCourses();
