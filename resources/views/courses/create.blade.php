@@ -34,7 +34,7 @@
 
         {{Form::submit('Create', ['class' => 'btn btn-primary'])}}
 
-        <a class="btn btn-secondary" href="./">Cancel</a>
+        <a class="btn btn-secondary" href="./">Annuler</a>
 
     {!! Form::close() !!}
 

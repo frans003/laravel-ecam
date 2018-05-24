@@ -65,4 +65,3 @@
         {{$courses->links()}} 
 
 @endsection
-

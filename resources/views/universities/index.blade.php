@@ -17,7 +17,7 @@
 
                     <div class="media text-muted pt-3">
                         {{-- style="width: 50px; height: 40px;" --}}
-                        <img src= "/Notes_App - V2/public/storage/cover_images/{{$university->logo}}" width="5%" class="mr-2 media-object rounded"> 
+                        <img src= "/Notes_App - V2/public/storage/cover_images/{{$university->logo}}" alt="Logo {{$university->name}}" width="5%" class="mr-2 media-object rounded"> 
 
                         <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                         <strong class="d-block text-gray-dark">{{$university->name}}</strong>

@@ -19,8 +19,38 @@
             <ul class="navbar-nav mr-auto">
 
                     <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                Carnet d'Universités <span class="caret"></span>
+                            <a id="navbarDropdown" tabindex="1" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Catalogue de notes <span class="caret"></span>
+                            </a>
+    
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/Notes_App - V2/public/notes">
+                                    Afficher
+                                </a>
+                                <a class="dropdown-item" href="/Notes_App - V2/public/notes/create">
+                                    Créer
+                                </a>
+                            </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                            <a id="navbarDropdown" tabindex="2" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Régistre des cours <span class="caret"></span>
+                            </a>
+    
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/Notes_App - V2/public/cours">
+                                    Afficher
+                                </a>
+                                <a class="dropdown-item" href="/Notes_App - V2/public/cours/create">
+                                    Créer
+                                </a>
+                            </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                            <a id="navbarDropdown" tabindex="3" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Carnet d'universités <span class="caret"></span>
                             </a>
     
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -32,36 +62,6 @@
                                 </a>
                             </div>
                     </li>
-
-                    <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            Régistre des cours <span class="caret"></span>
-                        </a>
-
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/Notes_App - V2/public/cours">
-                                Afficher
-                            </a>
-                            <a class="dropdown-item" href="/Notes_App - V2/public/cours/create">
-                                Créer
-                            </a>
-                        </div>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            Catalogue de notes <span class="caret"></span>
-                        </a>
-
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/Notes_App - V2/public/notes">
-                                Afficher
-                            </a>
-                            <a class="dropdown-item" href="/Notes_App - V2/public/notes/create">
-                                Créer
-                            </a>
-                        </div>
-                    </li>
             </ul>
 
             <!-- Coté droit de la barre de navigation -->
@@ -72,15 +72,15 @@
                 
                     <!-- Utilisateur non connecté -->
                 @guest
-                    <li><a class="nav-link" href="{{ route('login') }}">{{ __('Connexion') }}</a></li>
-                    <li><a class="nav-link" href="{{ route('register') }}">{{ __("Inscription") }}</a></li>
+                    <li><a class="nav-link" href="{{ route('login') }}" tabindex="5">{{ __('Connexion') }}</a></li>
+                    <li><a class="nav-link" href="{{ route('register') }}" tabindex="6">{{ __("Inscription") }} </a></li>
                     <li><a href="http://localhost:8000/api" class="nav-link btn btn-light" style="color:#41B883"> <i class="fab fa-vuejs"></i> </a></li>
 
                     <!-- Utilisateur connecté -->
                 @else
 
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <a id="navbarDropdown" tabindex="4" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
 

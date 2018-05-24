@@ -9,7 +9,7 @@
         <h3 class="m-4">Les dernières notes ajoutées</h3>
 
     <div class="float-right">
-        <a href="/Notes_App - V2/public/notes/create" class="btn btn-primary m-4">Ajouter +</a>
+        <a href="/Notes_App - V2/public/notes/create" class="btn btn-primary m-4" >Ajouter +</a>
     </div>
 
     <span class="badge badge-pill badge-secondary m-4">Liste: plus récent d'abord</span>
@@ -22,7 +22,7 @@
                 
                     <div class="row">
                         <div class="col-md-2 col-sm-2 ">
-                            <img style = "width:100%" src = "/Notes_App - V2/public/storage/cover_images/{{$note->course->university->logo}}">
+                            <img style = "width:100%" src = "/Notes_App - V2/public/storage/cover_images/{{$note->course->university->logo}}" alt="Logo {{$note->course->university->name}}">
                         </div>
                         <div class="col-md-10 col-sm-10">
                             <h3 class="card-title">

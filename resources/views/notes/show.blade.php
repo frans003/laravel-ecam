@@ -12,7 +12,7 @@
 
         <div class="row">
                 <div class="col-md-2 col-sm-2">
-                    <img style = "width:100%" src = "/Notes_App - V2/public/storage/cover_images/{{$note->course->university->logo}}">
+                    <img style = "width:100%" src = "/Notes_App - V2/public/storage/cover_images/{{$note->course->university->logo}}" alt="Logo {{$note->course->university->name}}">
                 </div>
                 <div class="col-md-10 col-sm-10">
                         <p> <span class="font-weight-bold"> Description: </span> {{$note->body}} </p>
@@ -29,7 +29,7 @@
 
         <hr>
 
-        <small>Last Updated: {{$note->updated_at}} <br/> Written by: {{$note->user->name}}</small>
+        <small>Dernière mise-à-jour: {{$note->updated_at}} <br/> Écrit par: {{$note->user->name}}</small>
     
         <hr>
 
@@ -39,7 +39,7 @@
 
                 @if(auth::user()->id == $note->user_id) <!-- permet de donner la possibilité au createur du post de modoifer son post -->
                 <div class="col-md-8">
-                        <a href="/Notes_App/public/notes/{{$note->id}}/edit" class="btn btn-primary">Edit</a>
+                        <a href="/Notes_App - V2/public/notes/{{$note->id}}/edit" class="btn btn-primary">Edit</a>
                 </div>
                 <div class="col-md-4 text-right">
                         {!!Form::open(['action' => ['NotesController@destroy', $note->id], 'method' => 'POST'])!!}
@@ -53,4 +53,3 @@
         </div>
 
 @endsection
-

@@ -27,7 +27,7 @@
                         @if(count($notes)>0)
                             <table class="table table-striped">
                                 <tr>
-                                    <th>Title</th>
+                                    <th>Titre</th>
                                     <th></th>
                                     <th></th>
                                 </tr>
@@ -35,15 +35,15 @@
                             @foreach($notes as $note)
                                 <tr>
                                     <th>{{$note->title}}</th>
-                                    <th><a href="/Notes_App - V2/public/notes/{{$note->id}}/edit" class="btn btn-primary">Edit Post</a></th>
-                                    <th><a href="/Notes_App - V2/public/notes/{{$note->id}}" class="btn btn-success">View Post</a></th>
+                                    <th><a href="/Notes_App - V2/public/notes/{{$note->id}}/edit" class="btn btn-primary">Modifier</a></th>
+                                    <th><a href="/Notes_App - V2/public/notes/{{$note->id}}" class="btn btn-success">Afficher</a></th>
                                 </tr>
                             @endforeach
                             </table>
 
                         @else
 
-                            <p>No Posts Found!</p>
+                            <p>Pas de notes trouvées!</p>
 
                         @endif
 

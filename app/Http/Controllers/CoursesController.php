@@ -140,6 +140,6 @@ class CoursesController extends Controller
 
         $course -> delete();
 
-        return redirect('/cours')->with('success', 'Cours supprimée');
+        return redirect('/cours')->with('success', 'Cours supprimé');
     }
 }

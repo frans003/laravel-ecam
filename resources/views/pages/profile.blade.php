@@ -28,6 +28,5 @@
       </table>
       
       <a href="http://localhost:8000/api" class="nav-link btn btn-primary" style="color:#41B883"> <i class="fab fa-vuejs"> </i></a>
-
-
+      
 @endsection

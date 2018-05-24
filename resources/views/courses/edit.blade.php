@@ -5,7 +5,8 @@
 @endsection
 
 @section('content')
-    <h1 class = "mt-4">Modifier votre note</h1>
+
+    <h1 class = "mt-4">Modifier le cours</h1>
     <span class="badge badge-pill badge-warning">Modification</span>
     <br>
     <br>
@@ -22,7 +23,7 @@
         </div>
         {{Form::hidden('_method', 'PUT')}}
         {{Form::submit('Confirm', ['class' => 'btn btn-primary'])}}
-        <a class="btn btn-secondary" href="./">Cancel</a>
+        <a class="btn btn-secondary" href="./">Annuler</a>
     {!! Form::close() !!}
 
 @endsection

@@ -6,7 +6,7 @@
 
 @section('content')
 
-<a href="./" class ="btn btn-secondary mb-4 mt-2"> < Go Back</a>
+<a href="./" class ="btn btn-secondary mb-4 mt-2"> < Retour</a>
 
 <div class="container">
 
@@ -16,7 +16,7 @@
 
         <hr>
 
-        <small>Last Updated: {{$course->updated_at}} <br/> Added by: {{$course->user->name}} <br> DB ID: {{$course->id}}</small>
+        <small>Dernière mise-à-jour: {{$course->updated_at}} <br/> Ajouté par: {{$course->user->name}} <br> ID: {{$course->id}}</small>
     
         <hr>
 
